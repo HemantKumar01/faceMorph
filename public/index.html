@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" style="width: 500px; height: 895px">
+  <head>
+    <meta name="theme-color" content="#6c2bd9" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Morph</title>
+    <link href="../dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="accent-purple-700">
+    <div
+      id="upload"
+      class="ms-auto w-screen flex content-center justify-center flex-wrap items-center my-10"
+    >
+      <div class="text-4xl my-5 text-purple-700 font-bold">
+        <svg
+          class="w-6 h-6 text-purple-700 inline"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 18"
+        >
+          <path
+            d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z"
+          />
+        </svg>
+        Upload Photos
+      </div>
+      <div class="relative flex items-center justify-center w-11/12">
+        <label
+          for="dropzone-file"
+          class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+        >
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg
+              class="w-16 h-16 mb-4 text-purple-700 dark:text-purple-900"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 16"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+              />
+            </svg>
+            <p class="mb-2 text-lg text-gray-500 dark:text-gray-400">
+              <span class="font-semibold text-purple-700 dark:text-purple-950"
+                >Click to upload</span
+              >
+              or drag and drop
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">
+              PNG, JPG, or JPEG
+            </p>
+          </div>
+          <input
+            id="dropzone-file"
+            type="file"
+            class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+            multiple
+            accept="image/jpg, image/png, image/jpeg"
+          />
+          <!-- ! ALSO CHANGE FILE TYPES IN JS IF CHANGING HERE -->
+        </label>
+      </div>
+    </div>
+    <div class="flex justify-center content-center w-screen">
+      <div
+        id="gallery"
+        class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl"
+      ></div>
+    </div>
+    <div id="adjustments" class="">
+      <div class="text-4xl my-5 text-purple-700 font-bold w-full text-center">
+        <svg
+          class="w-6 h-6 text-purple-700 inline"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M1 5h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 1 0 0-2H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2Zm18 4h-1.424a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2h10.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Zm0 6H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 0 0 0 2h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Z"
+          />
+        </svg>
+        Adjust
+      </div>
+      <div class="text-lg my-5 text-purple-500 w-full text-center">
+        See Preview Below
+      </div>
+      <div
+        id="adjustmentForm"
+        class="flex justify-center content-center flex-wrap w-full"
+      >
+        <div id="orientationForm" class="w-10/12 max-w-xl">
+          <h3
+            class="mb-5 text-lg font-medium text-gray-900 dark:text-white text-center"
+          >
+            Orientation
+          </h3>
+          <ul class="grid w-full gap-6 md:grid-cols-2">
+            <li>
+              <input
+                type="radio"
+                id="vertical"
+                name="orientation"
+                value="vertical"
+                class="hidden peer"
+                required
+                checked
+              />
+              <label
+                for="vertical"
+                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-purple-500 peer-checked:border-purple-600 peer-checked:text-purple-600 peer-checked:bg-purple-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+              >
+                <div class="block">
+                  <div class="w-full text-lg">Vertical</div>
+                </div>
+              </label>
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="horizontal"
+                name="orientation"
+                value="horizontal"
+                class="hidden peer text-purple-700"
+              />
+              <label
+                for="horizontal"
+                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-purple-500 peer-checked:border-purple-600 peer-checked:text-purple-600 peer-checked:bg-purple-100 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+              >
+                <div class="block">
+                  <div class="w-full text-lg">Horizontal</div>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+        <div id="faceSizeForm" class="w-10/12 my-20">
+          <label
+            for="faceSize"
+            class="block mb-2 text-lg font-medium text-gray-900 dark:text-white text-center"
+            >Face Size</label
+          >
+          <input
+            id="faceSize"
+            type="range"
+            value="7"
+            min="1"
+            max="10"
+            class="relative w-56 text-center left-1/2 -translate-x-1/2 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          />
+        </div>
+      </div>
+      <canvas id="adjustmentPreview" class="bg-gray-800 mx-auto"></canvas>
+    </div>
+
+    <button
+      id="createButton"
+      type="button"
+      class="hidden text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 font-medium rounded-full text-lg px-5 py-2.5 text-center mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 my-10"
+      style="position: relative; left: 50%; transform: translateX(-50%)"
+    >
+      Create &rarr;
+    </button>
+    <!-- ---------------------------  -->
+    <div id="alert"></div>
+    <div class="modal loader flexbox" style="display: none">
+      <div class="spinner"></div>
+      <div class="spinnerLabel">Loading...</div>
+    </div>
+    <div id="dummy-image-container"></div>
+    <img
+      id="previewFace"
+      src="media/face-preview.png"
+      alt="face preview image for face size adjustment"
+      style="visibility: hidden"
+    />
+    <canvas class="input-canvas" width="648" height="962"></canvas>
+    <canvas id="output-canvas"></canvas>
+
+    <!-- ----------------------------  -->
+
+    <script src="helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+    <script src="alert.js"></script>
+    <script src="adjustments.js"></script>
+    <script src="uploadImages.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@vladmandic/human/dist/human.js"></script>
+    <script src="canvasRecorder.js"></script>
+    <script src="faceDetect.js"></script>
+    <script src="create.js"></script>
+  </body>
+</html>
